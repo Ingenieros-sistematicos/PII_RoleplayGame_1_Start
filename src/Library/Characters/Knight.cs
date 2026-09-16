@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Library
 {
     public class Knight
@@ -7,6 +9,8 @@ namespace Library
         public IItems Sword { get; set; }
         public IItems Shield { get; set; }
         public IItems Armor { get; set; }
+        
+        public List<IItems> Items{get; set;}
     
         public int AttackValue
         {
@@ -41,6 +45,10 @@ namespace Library
 
                 return defense;
             }
+        }
+        public void AddItem(IItems item)
+        {
+            Items.Add(item);
         }
          public int Health { get; set; }
           public Knight(string name)

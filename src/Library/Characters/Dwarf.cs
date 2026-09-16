@@ -12,16 +12,29 @@ public class Dwarf
     public int AttackValue { get; set; }
     public int DefenseValue { get; set; }
     public int Health { get; set; }
+    
+    public List<IItems> Items{get; set;}
 
     public Dwarf(string name)
     {
         Name = name;
         Health = 100;
     }
+    public void AddItem(IItems item)
+    {
+        Items.Add(item);
+    }
 
     public void ReceiveAttack(int power)
     {
-        int defenseTotal = DefenseValue + (Shield?.DefenseValue ?? 0) + (Helmet?.DefenseValue ?? 0);
+        int defenseTotal =DefenseValue;
+        for (int i = 0; i < this.Items.Count; i++)
+        {
+            if(this.Items[i].DefenseValue!=null)
+            {
+                defenseTotal+=this.Items[i].DefenseValue;
+            }
+        }
         int damage = power - defenseTotal;
 
         if (damage > 0)

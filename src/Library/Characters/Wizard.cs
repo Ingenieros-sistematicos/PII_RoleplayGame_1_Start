@@ -11,11 +11,17 @@ namespace Library
         public int AttackValue { get; set; }
         public int DefenseValue { get; set; }
         public int Health { get; set; }
+        
+        public List<IItems> Items{get; set;}
 
         public Wizard(string name)
         {
             Name = name;
             Health = 100;
+        }
+        public void AddItem(IItems item)
+        {
+            Items.Add(item);
         }
 
         public void ReceiveAttack(int power)
