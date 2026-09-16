@@ -1,13 +1,14 @@
+namespace Library
+{
 public class Archer
 {
     private const int DefaultAttackValue = 15;
     private const int DefaultDefenseValue = 8;
     private const int MaxHealth = 100;
-    private const int HealAmount = 20;
 
     public string Name { get; }
-    public Bow Bow { get; }
-    public Helmet Helmet { get; }
+    public IItems Bow { get; }
+    public IItems Helmet { get; }
     public int AttackValue { get; }
     public int DefenseValue { get; }
     public int Health { get; private set; }
@@ -36,4 +37,4 @@ public class Archer
             Health = 0;
         }
     }
-}
+}}

@@ -1,44 +1,46 @@
 using System;
 using System.Collections.Generic;
 
-
-public class Wizard
+namespace Library
 {
-    public string Name { get; set; }
-    public Staff Staff { get; set; }
-    public SpellBook Spellbook { get; set; }
-    public int AttackValue { get; set; }
-    public int DefenseValue { get; set; }
-    public int Health { get; set; }
-
-    public Wizard(string name)
+    public class Wizard
     {
-        Name = name;
-        Health = 100;
-    }
+        public string Name { get; set; }
+        public IItems Staff { get; set; }
+        public SpellBook Spellbook { get; set; }
+        public int AttackValue { get; set; }
+        public int DefenseValue { get; set; }
+        public int Health { get; set; }
 
-    public void ReceiveAttack(int power)
-    {
-        int defenseTotal = DefenseValue + (Staff?.DefenseValue ?? 0) + (Spellbook?.DefenseValue ?? 0);
-        int damage = power - defenseTotal;
-
-        if (damage > 0)
+        public Wizard(string name)
         {
-            Health -= damage;
-        }
-
-        if (Health < 0)
-        {
-            Health = 0;
-        }
-    }
-
-    public void Cure()
-    {
-        Health += 10;
-        if (Health > 100)
-        {
+            Name = name;
             Health = 100;
+        }
+
+        public void ReceiveAttack(int power)
+        {
+            int defenseTotal = DefenseValue + (Staff?.DefenseValue ?? 0) + (Spellbook?.DefenseValue ?? 0);
+            int damage = power - defenseTotal;
+
+            if (damage > 0)
+            {
+                Health -= damage;
+            }
+
+            if (Health < 0)
+            {
+                Health = 0;
+            }
+        }
+
+        public void Cure()
+        {
+            Health += 10;
+            if (Health > 100)
+            {
+                Health = 100;
+            }
         }
     }
 }

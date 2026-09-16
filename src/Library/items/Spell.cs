@@ -1,3 +1,5 @@
+namespace Library
+{
 public class Spell
 {
     public int AttackValue { get; set; }
@@ -8,4 +10,4 @@ public class Spell
         AttackValue = attackValue;
         DefenseValue = defenseValue;
     }
-}
+}}

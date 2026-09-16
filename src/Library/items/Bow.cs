@@ -1,9 +1,13 @@
-public class Bow
+namespace Library
 {
-    public int AttackValue { get; }
+public class Bow:IItems
+{
+    public int DefenseValue { get; set; }
+    public int AttackValue {get; set; }
 
     public Bow(int attackValue)
     {
         AttackValue = attackValue;
+        DefenseValue=0;
     }
-}
+}}

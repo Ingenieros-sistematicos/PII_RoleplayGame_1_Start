@@ -6,9 +6,9 @@ using Library;
 public class Dwarf
 {
     public string Name { get; set; }
-    public Axe Axe { get; set; }
-    public Shield Shield { get; set; }
-    public Helmet Helmet { get; set; }
+    public IItems Axe { get; set; }
+    public IItems Shield { get; set; }
+    public IItems Helmet { get; set; }
     public int AttackValue { get; set; }
     public int DefenseValue { get; set; }
     public int Health { get; set; }

@@ -4,16 +4,16 @@ namespace Library
     {
         public string Name { get; set; }
 
-        public Sword Sword { get; set; }
-        public Shield Shield { get; set; }
-        public Armor Armor { get; set; }
+        public IItems Sword { get; set; }
+        public IItems Shield { get; set; }
+        public IItems Armor { get; set; }
     
         public int AttackValue
         {
             get
             {
                 int attack=0;
-                if (Sword != null);
+                if (Sword != null)
                 {
                     attack += Sword.AttackValue ;
 
