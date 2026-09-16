@@ -16,6 +16,7 @@ public class Archer
     {
         Name = name;
         Health = 100;
+        Items= new List<IItems>{};
     }
     public void AddItem(IItems item)
         {

@@ -18,7 +18,7 @@ public class SpellBook:IItems
         int attackTotal =0;
             for (int i = 0; i < this.Spells.Count; i++)
             {
-                attackTotal+=this.Spells[i].DefenseValue;
+                attackTotal+=this.Spells[i].AttackValue;
             }
         AttackValue = attackValue+attackTotal;
         DefenseValue = defenseValue+defenseTotal;
@@ -26,5 +26,7 @@ public class SpellBook:IItems
     public void AddSpell(Spell spell)
         {
             this.Spells.Add(spell);
+            AttackValue += spell.AttackValue;
+            DefenseValue += spell.DefenseValue;
         }
 }}

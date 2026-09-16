@@ -5,10 +5,6 @@ namespace Library
     public class Knight
     {
         public string Name { get; set; }
-
-        public IItems Sword { get; set; }
-        public IItems Shield { get; set; }
-        public IItems Armor { get; set; }
         
         public List<IItems> Items{get; set;}
         public void ReceiveAttack(int power)
@@ -42,6 +38,7 @@ namespace Library
         {
             Name = name;
             Health = 100;
+            Items= new List<IItems>{};
         }
 
         public void Cure()
