@@ -1,12 +1,3 @@
-public class Bow
-{
-    public int AttackValue { get; }
-
-    public Bow(int attackValue)
-    {
-        AttackValue = attackValue;
-    }
-}
 public class Archer
 {
     private const int DefaultAttackValue = 15;
