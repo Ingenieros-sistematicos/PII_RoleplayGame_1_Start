@@ -1,34 +1,7 @@
 using System;
+using System.Collections.Generic;
+using Library;
 
-public class Axe
-{
-    public int AttackValue { get; set; }
-
-    public Axe(int attackValue)
-    {
-        AttackValue = attackValue;
-    }
-}
-
-public class Shield
-{
-    public int DefenseValue { get; set; }
-
-    public Shield(int defenseValue)
-    {
-        DefenseValue = defenseValue;
-    }
-}
-
-public class Helmet
-{
-    public int DefenseValue { get; set; }
-
-    public Helmet(int defenseValue)
-    {
-        DefenseValue = defenseValue;
-    }
-}
 
 public class Dwarf
 {
