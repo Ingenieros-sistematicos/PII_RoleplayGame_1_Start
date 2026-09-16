@@ -6,9 +6,6 @@ using Library;
 public class Dwarf
 {
     public string Name { get; set; }
-    public IItems Axe { get; set; }
-    public IItems Shield { get; set; }
-    public IItems Helmet { get; set; }
     public int AttackValue { get; set; }
     public int DefenseValue { get; set; }
     public int Health { get; set; }
@@ -27,7 +24,7 @@ public class Dwarf
 
     public void ReceiveAttack(int power)
     {
-        int defenseTotal =DefenseValue;
+        int defenseTotal =0;
         for (int i = 0; i < this.Items.Count; i++)
         {
             if(this.Items[i].DefenseValue!=null)

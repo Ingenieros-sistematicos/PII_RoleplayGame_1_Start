@@ -24,7 +24,15 @@ public class Archer
 
     public void ReceiveAttack(int power)
     {
-        int damage = power - DefenseValue;
+        int defenseTotal =0;
+        for (int i = 0; i < this.Items.Count; i++)
+        {
+            if(this.Items[i].DefenseValue!=null)
+            {
+                defenseTotal+=this.Items[i].DefenseValue;
+            }
+        }
+        int damage = power - defenseTotal;
 
         if (damage > 0)
         {

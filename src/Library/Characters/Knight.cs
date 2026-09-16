@@ -11,39 +11,26 @@ namespace Library
         public IItems Armor { get; set; }
         
         public List<IItems> Items{get; set;}
-    
-        public int AttackValue
+        public void ReceiveAttack(int power)
         {
-            get
+            int defenseTotal =0;
+            for (int i = 0; i < this.Items.Count; i++)
             {
-                int attack=0;
-                if (Sword != null)
+                if(this.Items[i].DefenseValue!=null)
                 {
-                    attack += Sword.AttackValue ;
-
+                    defenseTotal+=this.Items[i].DefenseValue;
                 }
-                return attack;
-
-
             }
-        }
-        public int DefenseValue
-        {
-            get
+            int damage = power - defenseTotal;
+
+            if (damage > 0)
             {
-                int defense = 0;
+                Health -= damage;
+            }
 
-                if (Shield != null)
-                {
-                    defense += Shield.DefenseValue;
-                }
-
-                if (Armor != null)
-                {
-                    defense += Armor.DefenseValue;
-                }
-
-                return defense;
+            if (Health < 0)
+            {
+                Health = 0;
             }
         }
         public void AddItem(IItems item)
@@ -55,20 +42,6 @@ namespace Library
         {
             Name = name;
             Health = 100;
-        }
-          public void ReceiveAttack(int power)
-        {
-            int damage = power - DefenseValue;
-
-            if (damage > 0)
-            {
-                Health -= damage;
-            }
-
-            if (Health < 0)
-            {
-                Health = 0;
-            }
         }
 
         public void Cure()

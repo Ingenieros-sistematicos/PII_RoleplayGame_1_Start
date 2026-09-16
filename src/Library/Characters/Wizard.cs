@@ -6,7 +6,6 @@ namespace Library
     public class Wizard
     {
         public string Name { get; set; }
-        public IItems Staff { get; set; }
         public SpellBook Spellbook { get; set; }
         public int AttackValue { get; set; }
         public int DefenseValue { get; set; }
@@ -26,7 +25,14 @@ namespace Library
 
         public void ReceiveAttack(int power)
         {
-            int defenseTotal = DefenseValue + (Staff?.DefenseValue ?? 0) + (Spellbook?.DefenseValue ?? 0);
+            int defenseTotal = Spellbook.DefenseValue;
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                if(this.Items[i].DefenseValue!=0)
+                {
+                    defenseTotal+=this.Items[i].DefenseValue;
+                }
+            }
             int damage = power - defenseTotal;
 
             if (damage > 0)
