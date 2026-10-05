@@ -56,39 +56,62 @@ namespace Library.Characters
         }
         public void DoEncounter(List<Hero> Heroes, List<BadBoys> BadBoys)
         {
-            while (Heroes.Count!=0 | BadBoys.Count !=0)
+            // Los personajes que ya estaban derrotados no participan.
+            Heroes.RemoveAll(hero => hero.Health <= 0);
+            BadBoys.RemoveAll(enemy => enemy.Health <= 0);
+
+            while (Heroes.Count > 0 && BadBoys.Count > 0)
             {
-                for (int i = 0; i < BadBoys.Count; i++)
+                bool damageDealt = false;
+
+                // Los enemigos atacan primero, distribuyéndose entre los héroes.
+                for (int i = 0; i < BadBoys.Count && Heroes.Count > 0; i++)
                 {
-                    if (Heroes[i%Heroes.Count].Health <= 0)
+                    Hero target = Heroes[i % Heroes.Count];
+                    int previousHealth = target.Health;
+                    for (int j = 0; j < BadBoys[i].Items.Count && target.Health > 0; j++)
                     {
-                        Heroes.Remove(Heroes[i % Heroes.Count]);
+                        target.ReceiveAttack(BadBoys[i].Items[j].AttackValue);
                     }
-                    else
+
+                    damageDealt |= target.Health < previousHealth;
+                    if (target.Health <= 0)
                     {
-                        for (int j = 0; j < BadBoys[i].Items.Count; j++)
-                        {
-                            Heroes[i%Heroes.Count].ReceiveAttack(BadBoys[i].Items[j].AttackValue);
-                        }
+                        Heroes.Remove(target);
                     }
                 }
-                for (int i = 0; i < Heroes.Count; i++)
+
+                for (int i = 0; i < Heroes.Count && BadBoys.Count > 0; i++)
                 {
-                    for ( int k = 0; k < BadBoys.Count; k++)
+                    int k = 0;
+                    while (k < BadBoys.Count)
                     {
-                        if (BadBoys[k].Health <= 0)
+                        BadBoys enemy = BadBoys[k];
+                        int previousHealth = enemy.Health;
+                        for (int j = 0; j < Heroes[i].Items.Count && enemy.Health > 0; j++)
                         {
-                            BadBoys.Remove(BadBoys[k]);
-                            Heroes[i].AddVP(BadBoys[k].Vp);
+                            enemy.ReceiveAttack(Heroes[i].Items[j].AttackValue);
+                        }
+
+                        damageDealt |= enemy.Health < previousHealth;
+                        if (enemy.Health <= 0)
+                        {
+                            // Conservar la referencia permite otorgar los VP del enemigo correcto.
+                            Heroes[i].AddVP(enemy.Vp);
+                            BadBoys.RemoveAt(k);
+                            // El siguiente enemigo ocupa el mismo índice.
                         }
                         else
                         {
-                            for (int j = 0; j < Heroes[i].Items.Count; j++)
-                            {
-                                BadBoys[k].ReceiveAttack(Heroes[i].Items[j].AttackValue);
-                            }
+                            k++;
                         }
                     }
+                }
+
+                // Sin daño en una ronda, el combate no puede avanzar.
+                if (!damageDealt)
+                {
+                    break;
                 }
             }
         }
