@@ -6,7 +6,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Library;
+using Library.Characters;
 
 namespace Ucu.Poo.RolePlayGame
 {
@@ -50,6 +52,10 @@ namespace Ucu.Poo.RolePlayGame
             // Estas pruebas detectan que no se recalculan los totales.
             Check("Ataque al agregar hechizo", 30, book.AttackValue);
             Check("Defensa al agregar hechizo", 8, book.DefenseValue);
+
+            knight.AddVP(5);
+
+            Check("Agregar VP", 6, knight.Vp);
         }
 
         private static void Check(
