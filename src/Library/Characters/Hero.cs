@@ -12,6 +12,7 @@ namespace Library.Characters
             if(AddedVP>=5)
             {
                 this.Vp+=AddedVP;
+                this.Cure();
             }
         }
         public void AddItem(IItems item)

@@ -66,8 +66,9 @@ namespace Ucu.Poo.RolePlayGame
 
             List<Hero> heroes = new List<Hero> { encounterKnight };
             List<BadBoys> enemies = new List<BadBoys> { enemy };
+            encounterKnight.DoEncounter(heroes, enemies);
 
-            Check("Vida del héroe después del encuentro", 90, encounterKnight.Health);
+            Check("Vida del héroe después del encuentro", 100, encounterKnight.Health);
             Check("Enemigo derrotado", 0, enemy.Health);
             Check("Héroes restantes", 1, heroes.Count);
             Check("Enemigos restantes", 0, enemies.Count);
