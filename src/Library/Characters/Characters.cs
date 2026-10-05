@@ -64,7 +64,6 @@ namespace Library.Characters
             {
                 bool damageDealt = false;
 
-                // Los enemigos atacan primero, distribuyéndose entre los héroes.
                 for (int i = 0; i < BadBoys.Count && Heroes.Count > 0; i++)
                 {
                     Hero target = Heroes[i % Heroes.Count];
@@ -96,10 +95,8 @@ namespace Library.Characters
                         damageDealt |= enemy.Health < previousHealth;
                         if (enemy.Health <= 0)
                         {
-                            // Conservar la referencia permite otorgar los VP del enemigo correcto.
                             Heroes[i].AddVP(enemy.Vp);
                             BadBoys.RemoveAt(k);
-                            // El siguiente enemigo ocupa el mismo índice.
                         }
                         else
                         {
@@ -107,8 +104,6 @@ namespace Library.Characters
                         }
                     }
                 }
-
-                // Sin daño en una ronda, el combate no puede avanzar.
                 if (!damageDealt)
                 {
                     break;

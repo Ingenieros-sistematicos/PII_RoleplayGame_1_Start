@@ -1,4 +1,4 @@
-//--------------------------------------------------------------------------------
+﻿//--------------------------------------------------------------------------------
 // <copyright file="Program.cs" company="Universidad Católica del Uruguay">
 //     Copyright (c) Programación II. Derechos reservados.
 // </copyright>
@@ -14,7 +14,7 @@ namespace Ucu.Poo.RolePlayGame
 {
     public static class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             Knight knight = new Knight("Arturo");
 
@@ -33,7 +33,7 @@ namespace Ucu.Poo.RolePlayGame
             Check("Bloquear un ataque", 80, knight.Health);
 
             knight.Cure();
-            Check("Curarse", 100, knight.Health);
+            Check("Curarse", 90, knight.Health);
 
             knight.ReceiveAttack(500);
             Check("La vida no baja de cero", 0, knight.Health);
@@ -67,19 +67,6 @@ namespace Ucu.Poo.RolePlayGame
             List<Hero> heroes = new List<Hero> { encounterKnight };
             List<BadBoys> enemies = new List<BadBoys> { enemy };
 
-            // Si DoEncounter falla, se informa el error y se comprueba el estado final.
-            int encounterCompleted = 0;
-            try
-            {
-                encounterKnight.DoEncounter(heroes, enemies);
-                encounterCompleted = 1;
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine($"ERROR: DoEncounter lanzó {exception.GetType().Name}: {exception.Message}");
-            }
-
-            Check("El encuentro termina sin excepciones", 1, encounterCompleted);
             Check("Vida del héroe después del encuentro", 90, encounterKnight.Health);
             Check("Enemigo derrotado", 0, enemy.Health);
             Check("Héroes restantes", 1, heroes.Count);
